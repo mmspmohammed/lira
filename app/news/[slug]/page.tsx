@@ -1,6 +1,6 @@
 // app/news/[slug]/page.tsx
 import { createServerSupabase } from "@/lib/supabase-server";
-import { generateMetadata, NewsArticleSchema, BreadcrumbSchema } from "@/lib/seo";
+import { generateMetadata as seoGenerateMetadata, NewsArticleSchema, BreadcrumbSchema } from "@/lib/seo";
 import { formatDate, sanitizeHtml } from "@/lib/format";
 import { notFound } from "next/navigation";
 import Script from "next/script";
@@ -21,9 +21,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     .eq("slug", params.slug)
     .single();
 
-  if (!article) return generateMetadata({ title: "خبر غير موجود", noIndex: true });
+  if (!article) return seoGenerateMetadata({ title: "خبر غير موجود", noIndex: true });
 
-  return generateMetadata({
+  return seoGenerateMetadata({
     title: article.title,
     description: article.summary?.substring(0, 160) || undefined,
     path: `/news/${params.slug}`,
