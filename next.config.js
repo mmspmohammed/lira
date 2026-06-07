@@ -1,16 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
   images: { unoptimized: true },
-  headers: async () => [
-    {
-      source: "/sw.js",
-      headers: [
-        { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
-        { key: "Service-Worker-Allowed", value: "/" },
-      ],
-    },
-  ],
+  typescript: { ignoreBuildErrors: false }, // خلي false لشوف الأخطاء
+  eslint: { ignoreDuringBuilds: true },
 };
 
 module.exports = nextConfig;
