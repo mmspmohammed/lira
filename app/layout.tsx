@@ -1,5 +1,5 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -14,6 +14,18 @@ const tajawal = Tajawal({
   display: "swap",
 });
 
+// ─── Viewport منفصل (Next.js 14) ───
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
+};
+
+// ─── Metadata بدون viewport ───
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -88,20 +100,15 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: siteConfig.name,
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-      { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
-    ],
-  },
   alternates: {
     canonical: "/",
     types: {
       "application/rss+xml": "/rss.xml",
     },
+  },
+  other: {
+    "google-site-verification": "YOUR_CODE_HERE",
+    "msapplication-TileColor": "#0f172a",
   },
 };
 
